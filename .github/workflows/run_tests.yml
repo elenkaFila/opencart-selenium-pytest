@@ -36,9 +36,16 @@ jobs:
         run:
           pip install pytest
           pytest --alluredir=allure-results
-      - name: Generate Allure report
-        run:
-          allure generate allure-results --clean -o allure-report
+          
+      - name: Generate report
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'microsoft' # See 'Supported distributions' for available options
+          java-version: '17'
+      - run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.23.1/allure-2.23.1.tgz && sudo tar -zxvf allure-2.23.1.tgz -C /opt/ && sudo ln -s /opt/allure-2.23.1/bin/allure /usr/bin/allure
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+      - run: allure generate allure-results --clean -o allure-report
       - name: Copy history from gh-pages to allure-results
         run:
           sudo mkdir -p allure-results/history  # Создает директорию для истории Allure

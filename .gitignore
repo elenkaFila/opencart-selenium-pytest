@@ -1,0 +1,4 @@
+__pycache__
+.vscode
+pages/__pycache__
+tests/__pycache__

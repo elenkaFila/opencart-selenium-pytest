@@ -1,1 +1,1 @@
-ui testing, allure, ci github actions
+pytest, ui testing, allure
